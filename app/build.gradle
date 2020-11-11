@@ -21,6 +21,10 @@ android {
     }
 
     buildTypes {
+        buildTypes.each {
+            it.buildConfigField "String", "BASE_URL", "\"https://api.themoviedb.org/\""
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
