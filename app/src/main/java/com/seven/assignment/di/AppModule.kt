@@ -1,16 +1,16 @@
 package com.seven.assignment.di
 
+import android.content.SharedPreferences
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.seven.assignment.BuildConfig
 import dagger.Module
 import dagger.Provides
-import okhttp3.Authenticator
-import okhttp3.Interceptor
-import okhttp3.OkHttpClient
+import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.IOException
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -38,17 +38,30 @@ class AppModule {
 
     @Provides
     fun provideOkHttpClient(
-        logInterceptor: HttpLoggingInterceptor
+        logInterceptor: HttpLoggingInterceptor,
+        tokenInterceptor: Interceptor,
     ): OkHttpClient =
         OkHttpClient.Builder()
             .connectTimeout(40, TimeUnit.SECONDS)
             .readTimeout(60, TimeUnit.SECONDS)
             .writeTimeout(60, TimeUnit.SECONDS)
             .addInterceptor(logInterceptor)
+            .addInterceptor(tokenInterceptor)
             .build()
 
     @Provides
     fun provideLoggingInterceptor() =
         HttpLoggingInterceptor().apply { level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE }
 
+    @Provides
+    fun provideHeaderInterceptor() = object : Interceptor {
+        @Throws(IOException::class)
+        override fun intercept(chain: Interceptor.Chain): Response {
+            val requestBuilder = chain.request().newBuilder()
+                .header("Content-Type", "application/json")
+                .header("Authorization", "Bearer ${BuildConfig.ACCESS_TOKEN}")
+
+            return chain.proceed(requestBuilder.build())
+        }
+    }
 }
