@@ -11,4 +11,19 @@ constructor(
     gson: Gson
 ) : BaseDataSource(gson) {
 
+    suspend fun getPopularMovies(page: Int = 1) = getResult {
+        apiService.getPopularMovies(page)
+    }
+
+    suspend fun getNowPlayingMovies(page: Int = 1) = getResult {
+        apiService.getNowPlayingMovies(page)
+    }
+
+    suspend fun getTopRatedMovies(page: Int = 1) = getResult {
+        apiService.getTopRatedMovies(page)
+    }
+
+    suspend fun getUpcomingMovies(page: Int = 1) = getResult {
+        apiService.getUpcomingMovies(page)
+    }
 }
