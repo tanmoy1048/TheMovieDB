@@ -40,7 +40,11 @@ abstract class BasePageDataSource<T>() : PageKeyedDataSource<Int, T>() {
         postError(e.message ?: e.toString())
     }
 
-    protected fun processResponse(response: Result<PaginatedResponse<T>>, page: Int, callback: (PaginatedResponse<T>) -> Unit){
+    protected fun processResponse(
+        response: Result<PaginatedResponse<T>>,
+        page: Int,
+        callback: (PaginatedResponse<T>) -> Unit
+    ) {
         if (response.status == Result.Status.SUCCESS) {
             val results = response.data!!
             callback(results)
@@ -57,7 +61,7 @@ abstract class BasePageDataSource<T>() : PageKeyedDataSource<Int, T>() {
         }
     }
 
-    protected fun postInitialNetworkStatus(page: Int){
+    protected fun postInitialNetworkStatus(page: Int) {
         if (page == 1)
             postAfterState(NetworkState.FIRST_TIME_LOADING)
         else

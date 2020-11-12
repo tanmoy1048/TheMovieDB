@@ -10,7 +10,6 @@ class PopularMoviePageDataSourceFactory constructor(
     private val dataSource: MainRepository,
     private val scope: CoroutineScope
 ) : DataSource.Factory<Int, Movie>() {
-
     val liveData = MutableLiveData<PopularMoviePageDataSource>()
 
     override fun create(): DataSource<Int, Movie> {

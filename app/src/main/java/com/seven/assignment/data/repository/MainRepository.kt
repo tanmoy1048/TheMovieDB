@@ -34,7 +34,7 @@ constructor(
         apiService.getUpcomingMovies(page)
     }
 
-    private fun observeRemotePagedPopularMovies(
+    fun observeRemotePagedPopularMovies(
         ioCoroutineScope: CoroutineScope
     ): Listing<Movie> {
         val dataSourceFactory =
