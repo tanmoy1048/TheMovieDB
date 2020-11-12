@@ -1,6 +1,7 @@
 package com.seven.assignment.data.repository
 
 import com.google.gson.Gson
+import com.seven.assignment.data.Result
 import retrofit2.Response
 import java.net.ConnectException
 

@@ -77,6 +77,10 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
 
+    //paging
+    def pagin_version = "1.0.1"
+    implementation "android.arch.paging:runtime:$pagin_version"
+
     // -- Lifecycle Components (ViewModel, LiveData and ReactiveStreams)
     def lifecycle_version = "2.2.0"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"

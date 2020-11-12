@@ -1,4 +1,4 @@
-package com.seven.assignment.data.repository
+package com.seven.assignment.data
 
 /**
  * A generic class that holds a value with its loading status.
