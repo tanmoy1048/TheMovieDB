@@ -1,6 +1,7 @@
 package com.seven.assignment.data.repository
 
 import androidx.lifecycle.Transformations
+import androidx.paging.DataSource
 import androidx.paging.LivePagedListBuilder
 import com.google.gson.Gson
 import com.seven.assignment.data.models.Listing
@@ -13,7 +14,7 @@ import javax.inject.Inject
 class MainRepository
 @Inject
 constructor(
-    val apiService: ApiService,
+    private val apiService: ApiService,
     gson: Gson
 ) : BaseDataSource(gson) {
 
@@ -33,9 +34,7 @@ constructor(
         apiService.getUpcomingMovies(page)
     }
 
-    fun observeRemotePagedPopularMovies(ioCoroutineScope: CoroutineScope): Listing<Movie> {
-        val dataSourceFactory =
-            BaseMoviePageDataSourceFactory(PopularMoviePageDataSource(this, ioCoroutineScope))
+    private fun <T: BasePageDataSource<Movie>> getPaginatedListing(dataSourceFactory: BaseMoviePageDataSourceFactory<T>): Listing<Movie>{
         val liveList = LivePagedListBuilder(
             dataSourceFactory,
             PaginationConfig.pagedListConfig()
@@ -45,47 +44,29 @@ constructor(
             pagedList = liveList,
             networkState = Transformations.switchMap(dataSourceFactory.liveData) { it.network }
         )
+    }
+
+    fun observeRemotePagedPopularMovies(ioCoroutineScope: CoroutineScope): Listing<Movie> {
+        val dataSourceFactory =
+            BaseMoviePageDataSourceFactory(PopularMoviePageDataSource(this, ioCoroutineScope))
+        return getPaginatedListing(dataSourceFactory)
     }
 
     fun observeRemotePagedTopRatedMovies(ioCoroutineScope: CoroutineScope): Listing<Movie> {
         val dataSourceFactory =
             BaseMoviePageDataSourceFactory(TopRatedMoviePageDataSource(this, ioCoroutineScope))
-        val liveList = LivePagedListBuilder(
-            dataSourceFactory,
-            PaginationConfig.pagedListConfig()
-        ).build()
-
-        return Listing(
-            pagedList = liveList,
-            networkState = Transformations.switchMap(dataSourceFactory.liveData) { it.network }
-        )
+        return getPaginatedListing(dataSourceFactory)
     }
 
     fun observeRemotePagedUpcomingMovies(ioCoroutineScope: CoroutineScope): Listing<Movie> {
         val dataSourceFactory =
             BaseMoviePageDataSourceFactory(UpComingMoviePageDataSource(this, ioCoroutineScope))
-        val liveList = LivePagedListBuilder(
-            dataSourceFactory,
-            PaginationConfig.pagedListConfig()
-        ).build()
-
-        return Listing(
-            pagedList = liveList,
-            networkState = Transformations.switchMap(dataSourceFactory.liveData) { it.network }
-        )
+        return getPaginatedListing(dataSourceFactory)
     }
 
     fun observeRemotePagedNowPlayingMovies(ioCoroutineScope: CoroutineScope): Listing<Movie> {
         val dataSourceFactory =
             BaseMoviePageDataSourceFactory(NowPlayingMoviePageDataSource(this, ioCoroutineScope))
-        val liveList = LivePagedListBuilder(
-            dataSourceFactory,
-            PaginationConfig.pagedListConfig()
-        ).build()
-
-        return Listing(
-            pagedList = liveList,
-            networkState = Transformations.switchMap(dataSourceFactory.liveData) { it.network }
-        )
+        return getPaginatedListing(dataSourceFactory)
     }
 }
