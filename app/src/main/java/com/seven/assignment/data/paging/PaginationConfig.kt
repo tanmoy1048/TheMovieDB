@@ -3,7 +3,6 @@ package com.seven.assignment.data.paging
 import androidx.paging.PagedList
 
 class PaginationConfig {
-
     companion object {
         private const val PAGE_SIZE = 20
 
@@ -13,5 +12,4 @@ class PaginationConfig {
             .setEnablePlaceholders(true)
             .build()
     }
-
 }

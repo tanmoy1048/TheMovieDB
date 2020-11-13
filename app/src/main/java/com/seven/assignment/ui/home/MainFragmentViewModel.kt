@@ -13,7 +13,7 @@ class MainFragmentViewModel @Inject constructor(private val mainRepository: Main
     ViewModel() {
 
     fun getMovies() {
-        pagedMovieResult.postValue(mainRepository.observeRemotePagedPopularMovies(viewModelScope))
+        pagedMovieResult.postValue(mainRepository.observeRemotePagedNowPlayingMovies(viewModelScope))
     }
 
     var pagedMovieResult = MutableLiveData<Listing<Movie>>()
