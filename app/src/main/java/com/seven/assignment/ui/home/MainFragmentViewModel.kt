@@ -18,7 +18,7 @@ class MainFragmentViewModel @Inject constructor(private val mainRepository: Main
 
     var pagedMovieResult = MutableLiveData<Listing<Movie>>()
 
-    val notifications = Transformations.switchMap(pagedMovieResult) {
+    val movies = Transformations.switchMap(pagedMovieResult) {
         it.pagedList
     }
     val networkState = Transformations.switchMap(pagedMovieResult) { it.networkState }

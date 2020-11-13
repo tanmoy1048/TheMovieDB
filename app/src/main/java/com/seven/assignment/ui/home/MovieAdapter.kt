@@ -1,14 +1,12 @@
 package com.seven.assignment.ui.home
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.seven.assignment.R
 import com.seven.assignment.data.models.Movie
-import kotlinx.android.synthetic.main.item_movie.view.*
+import com.seven.assignment.databinding.ItemMovieBinding
 
 
 class MovieAdapter(private val movieClickListener: MovieClickListener) :
@@ -24,9 +22,9 @@ class MovieAdapter(private val movieClickListener: MovieClickListener) :
     }) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_movie, parent, false)
-        return MovieViewHolder(view, movieClickListener)
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = ItemMovieBinding.inflate(inflater)
+        return MovieViewHolder(binding, movieClickListener)
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
@@ -35,20 +33,14 @@ class MovieAdapter(private val movieClickListener: MovieClickListener) :
 }
 
 class MovieViewHolder(
-    itemView: View,
+    private val binding: ItemMovieBinding,
     private val movieClickListener: MovieClickListener,
-) : RecyclerView.ViewHolder(itemView) {
-
-    private val titleText = itemView.title
-
+) : RecyclerView.ViewHolder(binding.root) {
 
     fun bindPost(movie: Movie) {
-        with(movie) {
-            titleText.text = title
-            itemView.setOnClickListener {
-                movieClickListener.onClick(movie)
-            }
-        }
+        binding.movie = movie
+        binding.itemClickListener = movieClickListener
+        binding.executePendingBindings()
     }
 }
 
