@@ -2,6 +2,7 @@ package com.seven.assignment.data.repository
 
 import com.google.gson.Gson
 import com.seven.assignment.data.Result
+import com.seven.assignment.data.models.ErrorResponse
 import retrofit2.Response
 import java.net.ConnectException
 
@@ -19,13 +20,23 @@ abstract class BaseDataSource(val gson: Gson) {
                 else
                     Result.success()
             }
-            return error(response.code(), response.message())
+            return processError(response)
         } catch (e: Exception) {
             return if (e is ConnectException) {
                 error(NO_INTERNET)
             } else {
                 error(e.message ?: e.toString())
             }
+        }
+    }
+
+    private fun <T> processError(response: Response<T>): Result<T> {
+        val errorResponse: ErrorResponse? =
+            gson.fromJson(response.errorBody()?.charStream(), ErrorResponse::class.java)
+        return if (errorResponse == null) {
+            error(response.code(), response.message())
+        } else {
+            error(errorResponse.statusCode, errorResponse.statusMessage)
         }
     }
 
