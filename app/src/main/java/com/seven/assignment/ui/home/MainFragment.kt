@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -12,6 +14,7 @@ import com.seven.assignment.data.models.Movie
 import com.seven.assignment.databinding.FragmentMainBinding
 import com.seven.assignment.viewmodels.ViewModelProviderFactory
 import dagger.android.support.DaggerFragment
+import kotlinx.android.synthetic.main.fragment_main.*
 import javax.inject.Inject
 
 
@@ -51,38 +54,19 @@ class MainFragment : DaggerFragment(), MovieClickListener {
     }
 
     private fun subscribeUI() {
-        viewModel.nowPlayingMovies.observe(viewLifecycleOwner, Observer {
+        viewModel.nowPlayingMovies.observe(viewLifecycleOwner, {
             nowPlayingMovieAdapter.submitList(it)
         })
-        viewModel.topRatedMovies.observe(viewLifecycleOwner, Observer {
+        viewModel.topRatedMovies.observe(viewLifecycleOwner, {
             topRatedMovieAdapter.submitList(it)
         })
-        viewModel.popularMovies.observe(viewLifecycleOwner, Observer {
+        viewModel.popularMovies.observe(viewLifecycleOwner, {
             popularMovieAdapter.submitList(it)
         })
-        viewModel.upComingMovies.observe(viewLifecycleOwner, Observer {
+        viewModel.upComingMovies.observe(viewLifecycleOwner, {
             upComingMovieAdapter.submitList(it)
         })
 
-        viewModel.networkState.observe(viewLifecycleOwner, Observer {
-            when (it.status) {
-                Status.RUNNING -> {
-                    Log.d(TAG, "loading")
-                }
-                Status.SUCCESS -> {
-                    Log.d(TAG, "success")
-                }
-                Status.FAILED -> {
-                    Log.d(TAG, "failed")
-                }
-                Status.SUCCESS_EMPTY -> {
-                    Log.d(TAG, "success empty")
-                }
-                Status.FIRST_TIME_RUNNING -> {
-                    Log.d(TAG, "first time loading")
-                }
-            }
-        })
         viewModel.getMovies()
     }
 

@@ -24,16 +24,20 @@
 
 package com.seven.assignment.ui.home
 
+import android.view.View
 import android.widget.ImageView
+import android.widget.ProgressBar
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.seven.assignment.BuildConfig
 import com.seven.assignment.R
+import com.seven.assignment.data.NetworkState
+import com.seven.assignment.data.Status
 import com.seven.assignment.data.models.Movie
 import com.seven.assignment.extension.requestGlideListener
 
 
-@BindingAdapter(value = ["bindMovieImage"], requireAll = true)
+@BindingAdapter("bindMovieImage")
 fun bindMovieImage(view: ImageView, movie: Movie) {
     val width = view.resources.getInteger(R.integer.poster_width)
     val glideUrl = "${BuildConfig.BASE_IMAGE_URL}w$width${movie.posterPath}"
@@ -42,3 +46,26 @@ fun bindMovieImage(view: ImageView, movie: Movie) {
         .into(view)
 }
 
+@BindingAdapter("customVisibility")
+fun customVisibility(progressBar: ProgressBar, networkState: NetworkState?) {
+    when (networkState?.status) {
+        Status.RUNNING -> {
+            progressBar.visibility = View.VISIBLE
+        }
+        Status.SUCCESS -> {
+            progressBar.visibility = View.GONE
+        }
+        Status.FAILED -> {
+            progressBar.visibility = View.GONE
+        }
+        Status.SUCCESS_EMPTY -> {
+            progressBar.visibility = View.GONE
+        }
+        Status.FIRST_TIME_RUNNING -> {
+            progressBar.visibility = View.VISIBLE
+        }
+        else -> {
+            //Do Nothing
+        }
+    }
+}
