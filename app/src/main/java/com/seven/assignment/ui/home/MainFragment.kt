@@ -1,20 +1,14 @@
 package com.seven.assignment.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.seven.assignment.data.Status
-import com.seven.assignment.data.models.Movie
+import com.seven.assignment.data.models.movielist.Movie
 import com.seven.assignment.databinding.FragmentMainBinding
 import com.seven.assignment.viewmodels.ViewModelProviderFactory
 import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.fragment_main.*
 import javax.inject.Inject
 
 

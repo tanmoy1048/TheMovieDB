@@ -6,7 +6,7 @@
 
         <variable
             name="movie"
-            type="com.seven.assignment.data.models.Movie" />
+            type="com.seven.assignment.data.models.movielist.Movie" />
 
         <variable
             name="itemClickListener"

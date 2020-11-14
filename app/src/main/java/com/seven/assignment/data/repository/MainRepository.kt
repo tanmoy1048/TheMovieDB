@@ -1,13 +1,16 @@
 package com.seven.assignment.data.repository
 
 import androidx.lifecycle.Transformations
+import androidx.lifecycle.liveData
 import androidx.paging.LivePagedListBuilder
 import com.google.gson.Gson
+import com.seven.assignment.data.Result
 import com.seven.assignment.data.models.Listing
-import com.seven.assignment.data.models.Movie
+import com.seven.assignment.data.models.movielist.Movie
 import com.seven.assignment.data.paging.*
 import com.seven.assignment.data.remote.ApiService
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
 
 class MainRepository
@@ -31,6 +34,16 @@ constructor(
 
     suspend fun getUpcomingMovies(page: Int = 1) = getResult {
         apiService.getUpcomingMovies(page)
+    }
+
+    fun getMovieDetail(movieId: Int) = liveData(Dispatchers.IO) {
+        emit(Result.loading())
+        val responseStatus = getResult { apiService.getMovieDetail(movieId) }
+        if (responseStatus.status == Result.Status.SUCCESS) {
+            emit(responseStatus)
+        } else if (responseStatus.status == Result.Status.ERROR) {
+            emit(Result.error(responseStatus.message!!))
+        }
     }
 
     private fun <T : BasePageDataSource<Movie>> getPaginatedListing(dataSourceFactory: BaseMoviePageDataSourceFactory<T>): Listing<Movie> {

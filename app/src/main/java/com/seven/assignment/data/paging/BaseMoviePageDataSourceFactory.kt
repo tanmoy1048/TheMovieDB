@@ -2,7 +2,7 @@ package com.seven.assignment.data.paging
 
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
-import com.seven.assignment.data.models.Movie
+import com.seven.assignment.data.models.movielist.Movie
 
 class BaseMoviePageDataSourceFactory<T : BasePageDataSource<Movie>> constructor(
     private val source: T

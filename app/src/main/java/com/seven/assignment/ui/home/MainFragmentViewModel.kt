@@ -1,11 +1,10 @@
 package com.seven.assignment.ui.home
 
-import android.view.View
 import androidx.lifecycle.*
 import com.seven.assignment.data.NetworkState
 import com.seven.assignment.data.Status
 import com.seven.assignment.data.models.Listing
-import com.seven.assignment.data.models.Movie
+import com.seven.assignment.data.models.movielist.Movie
 import com.seven.assignment.data.repository.MainRepository
 import javax.inject.Inject
 
@@ -41,7 +40,7 @@ class MainFragmentViewModel @Inject constructor(private val mainRepository: Main
         )
     }
 
-    fun onRefresh(){
+    fun onRefresh() {
         getMovies()
     }
 
@@ -58,10 +57,14 @@ class MainFragmentViewModel @Inject constructor(private val mainRepository: Main
         it.pagedList
     }
 
-    private val popularNetworkState = Transformations.switchMap(pagedPopularMovieResult) { it.networkState }
-    private val topRatedNetworkState = Transformations.switchMap(pagedTopRatedMovieResult) { it.networkState }
-    private val nowPlayingNetworkState = Transformations.switchMap(pagedNowPlayingMovieResult) { it.networkState }
-    private val upComingNetworkState = Transformations.switchMap(pagedUpComingMovieResult) { it.networkState }
+    private val popularNetworkState =
+        Transformations.switchMap(pagedPopularMovieResult) { it.networkState }
+    private val topRatedNetworkState =
+        Transformations.switchMap(pagedTopRatedMovieResult) { it.networkState }
+    private val nowPlayingNetworkState =
+        Transformations.switchMap(pagedNowPlayingMovieResult) { it.networkState }
+    private val upComingNetworkState =
+        Transformations.switchMap(pagedUpComingMovieResult) { it.networkState }
 
     private val combinedNetworkStateData = MediatorLiveData<CombinedStatus>().apply {
         addSource(nowPlayingNetworkState) {

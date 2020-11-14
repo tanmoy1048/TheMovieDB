@@ -1,7 +1,7 @@
 package com.seven.assignment.data.paging
 
-import com.seven.assignment.data.models.Movie
 import com.seven.assignment.data.models.PaginatedResponse
+import com.seven.assignment.data.models.movielist.Movie
 import com.seven.assignment.data.repository.MainRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch

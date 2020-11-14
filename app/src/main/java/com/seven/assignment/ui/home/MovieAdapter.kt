@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.seven.assignment.data.models.Movie
+import com.seven.assignment.data.models.movielist.Movie
 import com.seven.assignment.databinding.ItemMovieBinding
 
 
