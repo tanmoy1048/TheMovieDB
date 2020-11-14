@@ -22,7 +22,8 @@ android {
 
     buildTypes {
         buildTypes.each {
-            it.buildConfigField "String", "BASE_URL", "\"https://api.themoviedb.org/\""
+            it.buildConfigField "String", "BASE_URL", "\"https://api.themoviedb.org\""
+            it.buildConfigField "String", "BASE_IMAGE_URL", "\"https://image.tmdb.org/t/p/\""
             it.buildConfigField "String", "ACCESS_TOKEN", "\"eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2MDk4NzBjYjJmMjZkMDdkY2ViOWNhNWZiNGFmNTJhNyIsInN1YiI6IjVmYWM2OWJiNmY5NzQ2MDAzYjEzNWU2OSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.-OKIXxYwSFgB_dOST_18Q5cK_crrjvmyqYJBkmzMXzk\""
         }
 

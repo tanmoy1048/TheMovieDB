@@ -36,7 +36,6 @@ class MovieViewHolder(
     private val binding: ItemMovieBinding,
     private val movieClickListener: MovieClickListener,
 ) : RecyclerView.ViewHolder(binding.root) {
-
     fun bindPost(movie: Movie) {
         binding.movie = movie
         binding.itemClickListener = movieClickListener

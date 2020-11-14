@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="dp_4">4dp</dimen>
+    <dimen name="poster_width">140dp</dimen>
+    <dimen name="poster_height">210dp</dimen>
 </resources>

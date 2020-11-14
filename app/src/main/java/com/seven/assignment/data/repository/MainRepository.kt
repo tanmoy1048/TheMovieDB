@@ -1,7 +1,6 @@
 package com.seven.assignment.data.repository
 
 import androidx.lifecycle.Transformations
-import androidx.paging.DataSource
 import androidx.paging.LivePagedListBuilder
 import com.google.gson.Gson
 import com.seven.assignment.data.models.Listing
@@ -34,7 +33,7 @@ constructor(
         apiService.getUpcomingMovies(page)
     }
 
-    private fun <T: BasePageDataSource<Movie>> getPaginatedListing(dataSourceFactory: BaseMoviePageDataSourceFactory<T>): Listing<Movie>{
+    private fun <T : BasePageDataSource<Movie>> getPaginatedListing(dataSourceFactory: BaseMoviePageDataSourceFactory<T>): Listing<Movie> {
         val liveList = LivePagedListBuilder(
             dataSourceFactory,
             PaginationConfig.pagedListConfig()
