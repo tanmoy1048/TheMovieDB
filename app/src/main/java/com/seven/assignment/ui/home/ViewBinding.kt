@@ -33,7 +33,7 @@ import com.seven.assignment.BuildConfig
 import com.seven.assignment.R
 import com.seven.assignment.data.NetworkState
 import com.seven.assignment.data.Status
-import com.seven.assignment.data.models.Movie
+import com.seven.assignment.data.models.movielist.Movie
 import com.seven.assignment.extension.requestGlideListener
 
 
