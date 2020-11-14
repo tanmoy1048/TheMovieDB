@@ -23,6 +23,7 @@ class MainFragment : DaggerFragment(), MovieClickListener {
     @Inject
     lateinit var providerFactory: ViewModelProviderFactory
     private lateinit var viewModel: MainFragmentViewModel
+
     private val nowPlayingMovieAdapter = MovieAdapter(this)
     private val topRatedMovieAdapter = MovieAdapter(this)
     private val popularMovieAdapter = MovieAdapter(this)
@@ -71,7 +72,7 @@ class MainFragment : DaggerFragment(), MovieClickListener {
     }
 
     override fun onClick(movie: Movie) {
-        // TODO("Not yet implemented")
+
     }
 
     companion object {

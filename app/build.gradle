@@ -52,6 +52,9 @@ dependencies {
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
 
+    //swipe to refresh
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+
     //jetpack navigation
     def nav_version = "2.3.1"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"

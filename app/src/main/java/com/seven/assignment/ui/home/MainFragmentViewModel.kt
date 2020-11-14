@@ -1,5 +1,6 @@
 package com.seven.assignment.ui.home
 
+import android.view.View
 import androidx.lifecycle.*
 import com.seven.assignment.data.NetworkState
 import com.seven.assignment.data.Status
@@ -14,8 +15,10 @@ class MainFragmentViewModel @Inject constructor(private val mainRepository: Main
     private val pagedUpComingMovieResult = MutableLiveData<Listing<Movie>>()
     private val pagedTopRatedMovieResult = MutableLiveData<Listing<Movie>>()
     private val pagedPopularMovieResult = MutableLiveData<Listing<Movie>>()
+    val showSwipeToRefresh = MutableLiveData<Boolean>()
 
     fun getMovies() {
+        showSwipeToRefresh.postValue(false)
         pagedNowPlayingMovieResult.postValue(
             mainRepository.observeRemotePagedNowPlayingMovies(
                 viewModelScope
@@ -38,6 +41,9 @@ class MainFragmentViewModel @Inject constructor(private val mainRepository: Main
         )
     }
 
+    fun onRefresh(){
+        getMovies()
+    }
 
     val nowPlayingMovies = Transformations.switchMap(pagedNowPlayingMovieResult) {
         it.pagedList
@@ -52,13 +58,10 @@ class MainFragmentViewModel @Inject constructor(private val mainRepository: Main
         it.pagedList
     }
 
-    val popularNetworkState = Transformations.switchMap(pagedPopularMovieResult) { it.networkState }
-    val topRatedNetworkState =
-        Transformations.switchMap(pagedTopRatedMovieResult) { it.networkState }
-    val nowPlayingNetworkState =
-        Transformations.switchMap(pagedNowPlayingMovieResult) { it.networkState }
-    val upComingNetworkState =
-        Transformations.switchMap(pagedUpComingMovieResult) { it.networkState }
+    private val popularNetworkState = Transformations.switchMap(pagedPopularMovieResult) { it.networkState }
+    private val topRatedNetworkState = Transformations.switchMap(pagedTopRatedMovieResult) { it.networkState }
+    private val nowPlayingNetworkState = Transformations.switchMap(pagedNowPlayingMovieResult) { it.networkState }
+    private val upComingNetworkState = Transformations.switchMap(pagedUpComingMovieResult) { it.networkState }
 
     private val combinedNetworkStateData = MediatorLiveData<CombinedStatus>().apply {
         addSource(nowPlayingNetworkState) {
@@ -111,20 +114,20 @@ data class CombinedStatus(
     var upComingStatus: NetworkState? = null
 ) {
     fun getStatus(): NetworkState? {
-        if (nowPlayingStatus?.status == Status.FAILED) {
-            return NetworkState.error("${nowPlayingStatus?.msg}")
+        return if (nowPlayingStatus?.status == Status.FAILED) {
+            NetworkState.error("${nowPlayingStatus?.msg}")
         } else if (topRatedStatus?.status == Status.FAILED) {
-            return NetworkState.error("${topRatedStatus?.msg}")
+            NetworkState.error("${topRatedStatus?.msg}")
         } else if (popularStatus?.status == Status.FAILED) {
-            return NetworkState.error("${popularStatus?.msg}")
+            NetworkState.error("${popularStatus?.msg}")
         } else if (upComingStatus?.status == Status.FAILED) {
-            return NetworkState.error("${upComingStatus?.msg}")
+            NetworkState.error("${upComingStatus?.msg}")
         } else if (nowPlayingStatus?.status == Status.SUCCESS && topRatedStatus?.status == Status.SUCCESS && popularStatus?.status == Status.SUCCESS && upComingStatus?.status == Status.SUCCESS) {
-            return NetworkState.LOADED
+            NetworkState.LOADED
         } else if (nowPlayingStatus?.status == Status.FIRST_TIME_RUNNING || topRatedStatus?.status == Status.FIRST_TIME_RUNNING || popularStatus?.status == Status.FIRST_TIME_RUNNING || upComingStatus?.status == Status.FIRST_TIME_RUNNING) {
-            return NetworkState.LOADING
+            NetworkState.LOADING
         } else {
-            return NetworkState.DO_NOTHING
+            NetworkState.DO_NOTHING
         }
     }
 }
