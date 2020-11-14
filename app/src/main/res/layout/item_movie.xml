@@ -23,19 +23,19 @@
             android:id="@+id/imageView"
             android:layout_width="@dimen/poster_width"
             android:layout_height="@dimen/poster_height"
+            android:adjustViewBounds="true"
             android:scaleType="fitCenter"
             app:bindMovieImage="@{movie}"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:adjustViewBounds="true" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@{movie.title}"
-            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

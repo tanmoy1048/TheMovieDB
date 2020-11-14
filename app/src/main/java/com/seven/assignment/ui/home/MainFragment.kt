@@ -20,7 +20,10 @@ class MainFragment : DaggerFragment(), MovieClickListener {
     @Inject
     lateinit var providerFactory: ViewModelProviderFactory
     private lateinit var viewModel: MainFragmentViewModel
-    private val movieAdapter = MovieAdapter(this)
+    private val nowPlayingMovieAdapter = MovieAdapter(this)
+    private val topRatedMovieAdapter = MovieAdapter(this)
+    private val popularMovieAdapter = MovieAdapter(this)
+    private val upComingMovieAdapter = MovieAdapter(this)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,7 +38,10 @@ class MainFragment : DaggerFragment(), MovieClickListener {
         ).apply {
             lifecycleOwner = viewLifecycleOwner
             viewmodel = viewModel
-            adapter = movieAdapter
+            nowPlayingAdapter = nowPlayingMovieAdapter
+            upComingAdapter = upComingMovieAdapter
+            topRatedAdapter = topRatedMovieAdapter
+            popularAdapter = popularMovieAdapter
         }.root
     }
 
@@ -44,10 +50,18 @@ class MainFragment : DaggerFragment(), MovieClickListener {
         subscribeUI()
     }
 
-
     private fun subscribeUI() {
-        viewModel.movies.observe(viewLifecycleOwner, Observer {
-            movieAdapter.submitList(it)
+        viewModel.nowPlayingMovies.observe(viewLifecycleOwner, Observer {
+            nowPlayingMovieAdapter.submitList(it)
+        })
+        viewModel.topRatedMovies.observe(viewLifecycleOwner, Observer {
+            topRatedMovieAdapter.submitList(it)
+        })
+        viewModel.popularMovies.observe(viewLifecycleOwner, Observer {
+            popularMovieAdapter.submitList(it)
+        })
+        viewModel.upComingMovies.observe(viewLifecycleOwner, Observer {
+            upComingMovieAdapter.submitList(it)
         })
 
         viewModel.networkState.observe(viewLifecycleOwner, Observer {

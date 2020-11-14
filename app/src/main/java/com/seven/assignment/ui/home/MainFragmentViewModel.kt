@@ -11,15 +11,47 @@ import javax.inject.Inject
 
 class MainFragmentViewModel @Inject constructor(private val mainRepository: MainRepository) :
     ViewModel() {
+    private val pagedNowPlayingMovieResult = MutableLiveData<Listing<Movie>>()
+    private val pagedUpComingMovieResult = MutableLiveData<Listing<Movie>>()
+    private val pagedTopRatedMovieResult = MutableLiveData<Listing<Movie>>()
+    private val pagedPopularMovieResult = MutableLiveData<Listing<Movie>>()
 
     fun getMovies() {
-        pagedMovieResult.postValue(mainRepository.observeRemotePagedNowPlayingMovies(viewModelScope))
+        pagedNowPlayingMovieResult.postValue(
+            mainRepository.observeRemotePagedNowPlayingMovies(
+                viewModelScope
+            )
+        )
+        pagedUpComingMovieResult.postValue(
+            mainRepository.observeRemotePagedUpcomingMovies(
+                viewModelScope
+            )
+        )
+        pagedTopRatedMovieResult.postValue(
+            mainRepository.observeRemotePagedTopRatedMovies(
+                viewModelScope
+            )
+        )
+        pagedPopularMovieResult.postValue(
+            mainRepository.observeRemotePagedPopularMovies(
+                viewModelScope
+            )
+        )
     }
 
-    var pagedMovieResult = MutableLiveData<Listing<Movie>>()
 
-    val movies = Transformations.switchMap(pagedMovieResult) {
+    val nowPlayingMovies = Transformations.switchMap(pagedNowPlayingMovieResult) {
         it.pagedList
     }
-    val networkState = Transformations.switchMap(pagedMovieResult) { it.networkState }
+    val upComingMovies = Transformations.switchMap(pagedUpComingMovieResult) {
+        it.pagedList
+    }
+    val topRatedMovies = Transformations.switchMap(pagedTopRatedMovieResult) {
+        it.pagedList
+    }
+    val popularMovies = Transformations.switchMap(pagedPopularMovieResult) {
+        it.pagedList
+    }
+
+    val networkState = Transformations.switchMap(pagedNowPlayingMovieResult) { it.networkState }
 }
