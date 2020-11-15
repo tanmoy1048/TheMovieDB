@@ -1,0 +1,12 @@
+<resources>
+    <dimen name="dp_4">6dp</dimen>
+    <dimen name="dp_2">3dp</dimen>
+
+    <dimen name="poster_width">160dp</dimen>
+    <dimen name="poster_height">240dp</dimen>
+
+    <dimen name="backdrop_height">300dp</dimen>
+
+    <dimen name="heading_font_size">24sp</dimen>
+    <dimen name="base_font_size">20sp</dimen>
+</resources>

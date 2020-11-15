@@ -31,6 +31,7 @@
 
         <TextView
             android:id="@+id/title"
+            style="@style/Main"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@color/transparent_black"

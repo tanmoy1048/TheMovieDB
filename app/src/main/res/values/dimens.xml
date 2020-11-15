@@ -6,7 +6,8 @@
     <dimen name="poster_width">140dp</dimen>
     <dimen name="poster_height">210dp</dimen>
 
-    <dimen name="backdrop_height">280dp</dimen>
+    <dimen name="backdrop_height">260dp</dimen>
 
     <dimen name="heading_font_size">20sp</dimen>
+    <dimen name="base_font_size">14sp</dimen>
 </resources>
