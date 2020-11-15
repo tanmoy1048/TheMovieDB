@@ -5,6 +5,7 @@ import androidx.lifecycle.liveData
 import androidx.paging.LivePagedListBuilder
 import com.google.gson.Gson
 import com.seven.assignment.data.Result
+import com.seven.assignment.data.local.MovieDao
 import com.seven.assignment.data.models.Listing
 import com.seven.assignment.data.models.movielist.Movie
 import com.seven.assignment.data.paging.*
@@ -17,6 +18,7 @@ class MainRepository
 @Inject
 constructor(
     private val apiService: ApiService,
+    private val movieDao: MovieDao,
     gson: Gson
 ) : BaseDataSource(gson) {
 

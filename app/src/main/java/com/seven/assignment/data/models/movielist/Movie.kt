@@ -1,21 +1,43 @@
 package com.seven.assignment.data.models.movielist
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.Ignore
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 
-data class Movie(
+@Entity(tableName = "Movie")
+class Movie(
+    @ColumnInfo(name = "poster_path")
     @SerializedName("poster_path") val posterPath: String,
-    @SerializedName("adult") val adult: Boolean,
-    @SerializedName("overview") val overview: String,
-    @SerializedName("release_date") val releaseDate: String,
-    @SerializedName("genre_ids") val genreIds: List<Int>,
+    @PrimaryKey
+    @ColumnInfo(name = "id")
     @SerializedName("id") val id: Int,
+    @ColumnInfo(name = "original_title")
     @SerializedName("original_title") val originalTitle: String,
-    @SerializedName("original_language") val originalLanguage: String,
+    @ColumnInfo(name = "title")
     @SerializedName("title") val title: String,
+    @ColumnInfo(name = "backdrop_path")
     @SerializedName("backdrop_path") val backdropPath: String?,
-    @SerializedName("popularity") val popularity: Double,
-    @SerializedName("vote_count") val voteCount: Int,
-    @SerializedName("video") val video: Boolean,
-    @SerializedName("vote_average") val voteAverage: Double
-)
+
+){
+    @Ignore
+    @SerializedName("adult") val adult: Boolean?=null
+    @Ignore
+    @SerializedName("overview") val overview: String?=null
+    @Ignore
+    @SerializedName("release_date") val releaseDate: String?=null
+    @Ignore
+    @SerializedName("genre_ids") val genreIds: List<Int>?=null
+    @Ignore
+    @SerializedName("popularity") val popularity: Double?=null
+    @Ignore
+    @SerializedName("vote_count") val voteCount: Int?=null
+    @Ignore
+    @SerializedName("video") val video: Boolean?=null
+    @Ignore
+    @SerializedName("vote_average") val voteAverage: Double?=null
+    @Ignore
+    @SerializedName("original_language") val originalLanguage: String?=null
+}

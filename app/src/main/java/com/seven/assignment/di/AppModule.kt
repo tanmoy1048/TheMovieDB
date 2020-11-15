@@ -1,8 +1,12 @@
 package com.seven.assignment.di
 
+import android.app.Application
+import androidx.room.Room
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.seven.assignment.BuildConfig
+import com.seven.assignment.data.local.MovieDao
+import com.seven.assignment.data.local.MovieDatabase
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
@@ -67,5 +71,22 @@ class AppModule {
 
             return chain.proceed(requestBuilder.build())
         }
+    }
+
+    @Provides
+    @Singleton
+    fun provideDealDatabase(application: Application): MovieDatabase {
+        return Room.databaseBuilder(
+            application,
+            MovieDatabase::class.java,
+            "movie.db"
+        ).fallbackToDestructiveMigration()
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideDealDao(movieDatabase: MovieDatabase): MovieDao {
+        return movieDatabase.dealDao()
     }
 }
