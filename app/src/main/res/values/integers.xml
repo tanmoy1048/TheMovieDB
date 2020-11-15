@@ -2,4 +2,8 @@
 <resources>
     <integer name="poster_width">300</integer>
     <integer name="backdrop_width">500</integer>
+
+    <integer name="navigation_anim_time">250</integer>
+    <integer name="anim_duration_long">350</integer>
+    <integer name="anim_duration_medium">1000</integer>
 </resources>

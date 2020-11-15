@@ -6,5 +6,21 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.seven.assignment.ui.home.MainFragment"
-        android:label="MainFragment" />
+        android:label="MainFragment">
+        <action
+            android:id="@+id/action_mainFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/movieDetailFragment"
+        android:name="com.seven.assignment.ui.detail.MovieDetailFragment"
+        android:label="MovieDetailFragment">
+        <argument
+            android:name="movieId"
+            app:argType="integer" />
+    </fragment>
 </navigation>

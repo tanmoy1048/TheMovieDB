@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import com.seven.assignment.data.models.movielist.Movie
 import com.seven.assignment.databinding.FragmentMainBinding
 import com.seven.assignment.viewmodels.ViewModelProviderFactory
@@ -66,7 +67,10 @@ class MainFragment : DaggerFragment(), MovieClickListener {
     }
 
     override fun onClick(movie: Movie) {
-
+        view?.let {
+            Navigation.findNavController(it)
+                .navigate(MainFragmentDirections.actionMainFragmentToMovieDetailFragment(movie.id))
+        }
     }
 
     companion object {

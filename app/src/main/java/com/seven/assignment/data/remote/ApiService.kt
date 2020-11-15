@@ -29,7 +29,7 @@ interface ApiService {
         @Query("page") page: Int,
     ): Response<PaginatedResponse<Movie>>
 
-    @GET("/3/movie/{movie_id}/")
+    @GET("/3/movie/{movie_id}")
     suspend fun getMovieDetail(
         @Path("movie_id") movieId: Int,
     ): Response<MovieDetail>

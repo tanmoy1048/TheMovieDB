@@ -32,10 +32,10 @@ import com.bumptech.glide.Glide
 import com.seven.assignment.BuildConfig
 import com.seven.assignment.R
 import com.seven.assignment.data.NetworkState
+import com.seven.assignment.data.Result
 import com.seven.assignment.data.Status
 import com.seven.assignment.data.models.movielist.Movie
 import com.seven.assignment.extension.requestGlideListener
-
 
 @BindingAdapter("bindMovieImage")
 fun bindMovieImage(view: ImageView, movie: Movie) {
@@ -67,5 +67,15 @@ fun customVisibility(progressBar: ProgressBar, networkState: NetworkState?) {
         else -> {
             //Do Nothing
         }
+    }
+}
+
+@BindingAdapter("customVisibility")
+fun customVisibility(progressBar: ProgressBar, status: Result.Status?) {
+    progressBar.visibility = when (status) {
+        Result.Status.SUCCESS -> View.GONE
+        Result.Status.ERROR -> View.GONE
+        Result.Status.LOADING -> View.VISIBLE
+        else -> View.GONE
     }
 }
