@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/movieDetailFragment"
         android:name="com.seven.assignment.ui.detail.MovieDetailFragment"
-        android:label="MovieDetailFragment">
+        android:label="Movie Detail">
         <argument
             android:name="movieId"
             app:argType="integer" />

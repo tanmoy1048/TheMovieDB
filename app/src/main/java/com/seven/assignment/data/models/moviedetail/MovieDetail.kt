@@ -1,6 +1,9 @@
 package com.seven.assignment.data.models.moviedetail
 
-import androidx.room.*
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
 import com.google.gson.annotations.SerializedName
 import com.seven.assignment.data.local.GenreListConverter
 

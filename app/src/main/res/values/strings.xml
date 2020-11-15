@@ -4,10 +4,11 @@
     <string name="upcoming">Upcoming</string>
     <string name="popular">Popular</string>
     <string name="top_rated">Top Rated</string>
-    <string name="vote_average">Average Vote: %1f</string>
+    <string name="vote_average">Average Vote: %1$.1f</string>
     <string name="retry">Retry</string>
+    <string name="genre_list">Genre: %1s</string>
     <plurals name="minutes">
-        <item quantity="one">%d Minute</item>
-        <item quantity="other">%d Minutes</item>
+        <item quantity="one">Duration: %d Minute</item>
+        <item quantity="other">Duration: %d Minutes</item>
     </plurals>
 </resources>

@@ -6,11 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
-import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
-import com.seven.assignment.BuildConfig
-import com.seven.assignment.R
-import com.seven.assignment.extension.requestGlideListener
 import com.seven.assignment.viewmodels.ViewModelProviderFactory
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_movie_detail.*
@@ -44,28 +40,7 @@ class MovieDetailFragment : DaggerFragment() {
         subscribeUI()
     }
 
-    private fun setBackDrop(path: String?) {
-        path?.let {
-            val width = resources.getInteger(R.integer.backdrop_width)
-            val glideUrl = "${BuildConfig.BASE_IMAGE_URL}w$width${path}"
-            Glide.with(requireContext()).load(glideUrl)
-                .listener(imageView.requestGlideListener())
-                .into(imageView)
-        }
-    }
-
     private fun subscribeUI() {
-        viewModel.movieDetail.observe(viewLifecycleOwner, { movieDetail ->
-            setBackDrop(movieDetail?.backdropPath)
-            title.text = movieDetail?.title
-            genre.text = movieDetail?.genres?.joinToString(separator = ",") { it.name }
-            movieDetail?.runtime?.let {
-                runningTime.text = resources.getQuantityString(R.plurals.minutes, it, it)
-            }
-            movieDetail?.voteAverage?.let {
-                voteAverage.text = getString(R.string.vote_average, it)
-            }
-        })
         viewModel.networkErrorMessage.observe(viewLifecycleOwner, {
             it?.let { msg ->
                 Snackbar.make(coordinator, msg, Snackbar.LENGTH_LONG)

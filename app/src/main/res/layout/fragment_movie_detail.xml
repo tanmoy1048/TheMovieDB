@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="com.seven.assignment.data.models.moviedetail.MovieDetail" />
+
         <variable
             name="viewmodel"
             type="com.seven.assignment.ui.detail.MovieDetailViewModel" />
@@ -13,8 +15,8 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinator"
         android:layout_width="match_parent"
-        android:background="@color/black"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/black">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -37,42 +39,53 @@
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/backdrop_height"
+                app:bindMovieImage="@{viewmodel.movieDetail}"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/title"
-                style="@style/TextAppearance.AppCompat.Title"
+                style="@style/Heading"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_4"
+                android:layout_marginTop="@dimen/dp_4"
+                android:layout_marginRight="@dimen/dp_4"
                 android:padding="@dimen/dp_4"
+                android:text="@{viewmodel.movieDetail.title}"
                 app:layout_constraintTop_toBottomOf="@+id/imageView"
                 tools:text="@string/app_name" />
 
             <TextView
                 android:id="@+id/genre"
-                style="@style/TextAppearance.AppCompat.Body1"
+                style="@style/MovieDetailTextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_2"
                 android:padding="@dimen/dp_4"
                 app:layout_constraintTop_toBottomOf="@+id/title"
+                app:setGenre="@{viewmodel.movieDetail}"
                 tools:text="@string/app_name" />
 
             <TextView
                 android:id="@+id/runningTime"
-                style="@style/TextAppearance.AppCompat.Body1"
+                style="@style/MovieDetailTextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_2"
                 android:padding="@dimen/dp_4"
                 app:layout_constraintTop_toBottomOf="@+id/genre"
+                app:setDuration="@{viewmodel.movieDetail.runtime}"
                 tools:text="@string/app_name" />
 
             <TextView
                 android:id="@+id/voteAverage"
-                style="@style/TextAppearance.AppCompat.Body1"
+                style="@style/MovieDetailTextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_2"
                 android:padding="@dimen/dp_4"
                 app:layout_constraintTop_toBottomOf="@+id/runningTime"
+                app:voteAverage="@{viewmodel.movieDetail.voteAverage}"
                 tools:text="@string/app_name" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

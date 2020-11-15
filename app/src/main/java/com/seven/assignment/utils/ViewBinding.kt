@@ -27,6 +27,7 @@ package com.seven.assignment.utils
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.seven.assignment.BuildConfig
@@ -34,6 +35,7 @@ import com.seven.assignment.R
 import com.seven.assignment.data.NetworkState
 import com.seven.assignment.data.Result
 import com.seven.assignment.data.Status
+import com.seven.assignment.data.models.moviedetail.MovieDetail
 import com.seven.assignment.data.models.movielist.Movie
 import com.seven.assignment.extension.requestGlideListener
 
@@ -44,6 +46,17 @@ fun bindMovieImage(view: ImageView, movie: Movie) {
     Glide.with(view.context).load(glideUrl)
         .listener(view.requestGlideListener())
         .into(view)
+}
+
+@BindingAdapter("bindMovieImage")
+fun bindMovieImage(view: ImageView, movie: MovieDetail?) {
+    movie?.let {
+        val width = view.resources.getInteger(R.integer.backdrop_width)
+        val glideUrl = "${BuildConfig.BASE_IMAGE_URL}w$width${movie.backdropPath}"
+        Glide.with(view.context).load(glideUrl)
+            .listener(view.requestGlideListener())
+            .into(view)
+    }
 }
 
 @BindingAdapter("headingVisibility")
@@ -95,5 +108,28 @@ fun customVisibility(progressBar: ProgressBar, status: Result.Status?) {
         Result.Status.ERROR -> View.GONE
         Result.Status.LOADING -> View.VISIBLE
         else -> View.GONE
+    }
+}
+
+@BindingAdapter("setDuration")
+fun setDuration(view: TextView, duration: Int?) {
+    duration?.let {
+        view.text = view.resources.getQuantityString(R.plurals.minutes, it, it)
+    }
+}
+
+@BindingAdapter("voteAverage")
+fun voteAverage(view: TextView, duration: Double?) {
+    duration?.let {
+        view.text = view.resources.getString(R.string.vote_average, it)
+    }
+}
+
+@BindingAdapter("setGenre")
+fun setGenre(view: TextView, movieDetail: MovieDetail?) {
+    movieDetail?.genres?.let { genres ->
+        view.text = view.resources.getString(
+            R.string.genre_list,
+            genres.joinToString(separator = ", ") { it.name })
     }
 }
