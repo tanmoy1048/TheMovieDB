@@ -46,6 +46,24 @@ fun bindMovieImage(view: ImageView, movie: Movie) {
         .into(view)
 }
 
+@BindingAdapter("headingVisibility")
+fun headingVisibility(view: View, networkState: NetworkState?) {
+    when (networkState?.status) {
+        Status.RUNNING -> {
+            view.visibility = View.GONE
+        }
+        Status.SUCCESS, Status.FAILED, Status.SUCCESS_EMPTY -> {
+            view.visibility = View.VISIBLE
+        }
+        Status.FIRST_TIME_RUNNING -> {
+            view.visibility = View.GONE
+        }
+        else -> {
+            //Do Nothing
+        }
+    }
+}
+
 @BindingAdapter("customVisibility")
 fun customVisibility(progressBar: ProgressBar, networkState: NetworkState?) {
     when (networkState?.status) {

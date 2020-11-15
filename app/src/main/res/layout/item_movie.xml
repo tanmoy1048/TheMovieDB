@@ -30,13 +30,20 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:padding="@dimen/dp_2"
             android:id="@+id/title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@{movie.title}"
+            android:textStyle="bold"
+            android:minLines="@integer/max_lines_movie_title"
+            android:maxLines="@integer/max_lines_movie_title"
+            android:ellipsize="end"
+            android:textColor="@color/white"
             app:layout_constraintLeft_toLeftOf="parent"
+            android:background="@color/transparent_black"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            app:layout_constraintBottom_toBottomOf="@+id/imageView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

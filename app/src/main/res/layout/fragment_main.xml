@@ -30,7 +30,8 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinator"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/black">
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipeToRefresh"
@@ -52,62 +53,102 @@
                         android:layout_height="wrap_content"
                         tools:context=".ui.MainActivity">
 
+                        <TextView
+                            android:id="@+id/nowPlayingHeading"
+                            style="@style/Heading"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/now_playing"
+                            android:visibility="gone"
+                            app:headingVisibility="@{viewmodel.nowPlayingNetworkState}"
+                            app:layout_constraintTop_toTopOf="parent" />
+
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/nowPlayingMovieRecyclerView"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_4"
                             android:adapter="@{nowPlayingAdapter}"
                             android:orientation="horizontal"
-                            android:paddingVertical="@dimen/dp_4"
-                            android:scrollbars="vertical"
+                            android:scrollbars="horizontal"
                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/nowPlayingHeading"
                             tools:ignore="UnusedAttribute" />
+
+                        <TextView
+                            android:id="@+id/upcomingHeading"
+                            style="@style/Heading"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/upcoming"
+                            android:visibility="gone"
+                            app:headingVisibility="@{viewmodel.upComingNetworkState}"
+                            app:layout_constraintTop_toBottomOf="@+id/nowPlayingMovieRecyclerView" />
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/upComingMovieRecyclerView"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_4"
                             android:adapter="@{upComingAdapter}"
                             android:orientation="horizontal"
-                            android:paddingVertical="@dimen/dp_4"
-                            android:scrollbars="vertical"
+                            android:scrollbars="horizontal"
                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/nowPlayingMovieRecyclerView"
+                            app:layout_constraintTop_toBottomOf="@+id/upcomingHeading"
                             tools:ignore="UnusedAttribute" />
+
+
+                        <TextView
+                            android:id="@+id/topRatedHeading"
+                            style="@style/Heading"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/top_rated"
+                            android:visibility="gone"
+                            app:headingVisibility="@{viewmodel.topRatedNetworkState}"
+                            app:layout_constraintTop_toBottomOf="@+id/upComingMovieRecyclerView" />
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/topRatedMovieRecyclerView"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_4"
                             android:adapter="@{topRatedAdapter}"
                             android:orientation="horizontal"
-                            android:paddingVertical="@dimen/dp_4"
-                            android:scrollbars="vertical"
+                            android:scrollbars="horizontal"
                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/upComingMovieRecyclerView"
+                            app:layout_constraintTop_toBottomOf="@+id/topRatedHeading"
                             tools:ignore="UnusedAttribute" />
+
+                        <TextView
+                            android:id="@+id/popularHeading"
+                            style="@style/Heading"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/popular"
+                            android:visibility="gone"
+                            app:headingVisibility="@{viewmodel.popularNetworkState}"
+                            app:layout_constraintTop_toBottomOf="@+id/topRatedMovieRecyclerView" />
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/popularMovieRecyclerView"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_4"
                             android:adapter="@{popularAdapter}"
                             android:orientation="horizontal"
-                            android:paddingVertical="@dimen/dp_4"
-                            android:scrollbars="vertical"
+                            android:scrollbars="horizontal"
                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/topRatedMovieRecyclerView"
+                            app:layout_constraintTop_toBottomOf="@+id/popularHeading"
                             tools:ignore="UnusedAttribute" />
-
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </ScrollView>

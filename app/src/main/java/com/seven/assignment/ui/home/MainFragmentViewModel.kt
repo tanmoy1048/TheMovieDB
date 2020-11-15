@@ -63,13 +63,13 @@ class MainFragmentViewModel @Inject constructor(private val mainRepository: Main
         it.pagedList
     }
 
-    private val popularNetworkState =
+    val popularNetworkState =
         Transformations.switchMap(pagedPopularMovieResult) { it.networkState }
-    private val topRatedNetworkState =
+    val topRatedNetworkState =
         Transformations.switchMap(pagedTopRatedMovieResult) { it.networkState }
-    private val nowPlayingNetworkState =
+    val nowPlayingNetworkState =
         Transformations.switchMap(pagedNowPlayingMovieResult) { it.networkState }
-    private val upComingNetworkState =
+    val upComingNetworkState =
         Transformations.switchMap(pagedUpComingMovieResult) { it.networkState }
 
     private val combinedNetworkStateData = MediatorLiveData<CombinedStatus>().apply {

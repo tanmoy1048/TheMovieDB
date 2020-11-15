@@ -1,0 +1,12 @@
+<resources>
+
+    <style name="Main" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Heading" parent="Main">
+        <item name="android:textSize">@dimen/heading_font_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:padding">@dimen/dp_4</item>
+    </style>
+</resources>
