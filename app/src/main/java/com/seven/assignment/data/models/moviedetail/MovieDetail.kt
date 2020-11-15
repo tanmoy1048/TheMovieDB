@@ -6,92 +6,105 @@ import com.seven.assignment.data.local.GenreListConverter
 
 @Entity(tableName = "MovieDetail")
 @TypeConverters(GenreListConverter::class)
-class MovieDetail(
+class MovieDetail {
     @ColumnInfo(name = "backdrop_path")
-    @SerializedName("backdrop_path") val backdropPath: String,
+    @SerializedName("backdrop_path")
+    var backdropPath: String? = null
+
     @ColumnInfo(name = "genres")
-    @SerializedName("genres") val genres: List<Genre>,
+    @SerializedName("genres")
+    var genres: List<Genre>? = null
+
     @PrimaryKey
     @ColumnInfo(name = "id")
-    @SerializedName("id") val id: Int,
+    @SerializedName("id")
+    var id: Int? = null
+
     @ColumnInfo(name = "original_title")
-    @SerializedName("original_title") val originalTitle: String,
+    @SerializedName("original_title")
+    var originalTitle: String? = null
+
     @ColumnInfo(name = "runtime")
-    @SerializedName("runtime") val runtime: Int?,
+    @SerializedName("runtime")
+    var runtime: Int? = null
+
     @ColumnInfo(name = "title")
-    @SerializedName("title") val title: String,
+    @SerializedName("title")
+    var title: String? = null
+
     @ColumnInfo(name = "voteAverage")
-    @SerializedName("vote_average") val voteAverage: Double,
-) {
+    @SerializedName("vote_average")
+    var voteAverage: Double? = null
+
     @Ignore
     @SerializedName("adult")
-    val adult: Boolean? = null
+    var adult: Boolean? = null
 
     @Ignore
     @SerializedName("belongs_to_collection")
-    val belongsToCollection: String? = null
+    var belongsToCollection: String? = null
 
     @Ignore
     @SerializedName("budget")
-    val budget: Int? = null
+    var budget: Int? = null
 
     @Ignore
     @SerializedName("homepage")
-    val homepage: String? = null
+    var homepage: String? = null
 
     @Ignore
     @SerializedName("imdb_id")
-    val imdbId: String? = null
+    var imdbId: String? = null
 
     @Ignore
     @SerializedName("original_language")
-    val originalLanguage: String? = null
+    var originalLanguage: String? = null
 
     @Ignore
     @SerializedName("overview")
-    val overview: String? = null
+    var overview: String? = null
 
     @Ignore
     @SerializedName("popularity")
-    val popularity: Double? = null
+    var popularity: Double? = null
 
     @Ignore
     @SerializedName("poster_path")
-    val posterPath: String? = null
+    var posterPath: String? = null
 
     @Ignore
     @SerializedName("production_companies")
-    val productionCompanies: List<ProductionCompany>? = null
+    var productionCompanies: List<ProductionCompany>? = null
 
     @Ignore
     @SerializedName("production_countries")
-    val productionCountries: List<Production_countries>? = null
+    var productionCountries: List<Production_countries>? = null
 
     @Ignore
     @SerializedName("release_date")
-    val releaseDate: String? = null
+    var releaseDate: String? = null
 
     @Ignore
     @SerializedName("revenue")
-    val revenue: Int? = null
+    var revenue: Int? = null
 
     @Ignore
     @SerializedName("spoken_languages")
-    val spokenLanguages: List<SpokenLanguage>? = null
+    var spokenLanguages: List<SpokenLanguage>? = null
 
     @Ignore
     @SerializedName("status")
-    val status: String? = null
+    var status: String? = null
 
     @Ignore
     @SerializedName("tagline")
-    val tagline: String? = null
+    var tagline: String? = null
 
     @Ignore
     @SerializedName("video")
-    val video: Boolean? = null
+    var video: Boolean? = null
 
     @Ignore
     @SerializedName("vote_count")
-    val voteCount: Int? = null
+    var voteCount: Int? = null
 }

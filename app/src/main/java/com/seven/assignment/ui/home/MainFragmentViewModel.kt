@@ -15,35 +15,38 @@ class MainFragmentViewModel @Inject constructor(private val mainRepository: Main
     private val pagedTopRatedMovieResult = MutableLiveData<Listing<Movie>>()
     private val pagedPopularMovieResult = MutableLiveData<Listing<Movie>>()
     val showSwipeToRefresh = MutableLiveData<Boolean>()
+    private var loaded = false
+
 
     fun getMovies() {
         showSwipeToRefresh.postValue(false)
-        if(combinedNetworkState.value?.status == Status.SUCCESS){
+        if(loaded){
             return
         }
         pagedNowPlayingMovieResult.postValue(
-            mainRepository.observeRemotePagedNowPlayingMovies(
+            mainRepository.observePagedNowPlayingMovies(
                 viewModelScope
             )
         )
         pagedUpComingMovieResult.postValue(
-            mainRepository.observeRemotePagedUpcomingMovies(
+            mainRepository.observePagedUpComingMovies(
                 viewModelScope
             )
         )
         pagedTopRatedMovieResult.postValue(
-            mainRepository.observeRemotePagedTopRatedMovies(
+            mainRepository.observePagedTopRatedMovies(
                 viewModelScope
             )
         )
         pagedPopularMovieResult.postValue(
-            mainRepository.observeRemotePagedPopularMovies(
+            mainRepository.observePagedPopularMovies(
                 viewModelScope
             )
         )
     }
 
     fun onRefresh() {
+        loaded = false
         getMovies()
     }
 
@@ -106,6 +109,10 @@ class MainFragmentViewModel @Inject constructor(private val mainRepository: Main
 
     val combinedNetworkState = Transformations.switchMap(combinedNetworkStateData) {
         if (it.nowPlayingStatus != null && it.popularStatus != null && it.topRatedStatus != null && it.upComingStatus != null) {
+            val status = it.getStatus()
+            if(status == NetworkState.LOADED){
+                loaded = true
+            }
             liveData { emit(it.getStatus()) }
         } else {
             liveData<NetworkState?> { emit(null) }

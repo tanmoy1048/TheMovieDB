@@ -8,6 +8,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.seven.assignment.data.models.moviedetail.MovieDetail
 import com.seven.assignment.data.models.movielist.Movie
+import com.seven.assignment.data.paging.MovieShelf
 
 
 @Dao
@@ -21,6 +22,6 @@ interface MovieDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMovies(movies: List<Movie>)
 
-    @Query("SELECT * FROM Movie")
-    fun getMovies(): DataSource.Factory<Int, Movie>
+    @Query("SELECT * FROM Movie WHERE shelf = :shelf")
+    fun getMovies(shelf: MovieShelf): DataSource.Factory<Int, Movie>
 }

@@ -4,7 +4,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
 import com.seven.assignment.data.NetworkState
 import com.seven.assignment.data.Result
+import com.seven.assignment.data.local.MovieDao
 import com.seven.assignment.data.models.PaginatedResponse
+import com.seven.assignment.data.models.movielist.Movie
 import kotlinx.coroutines.CoroutineExceptionHandler
 
 abstract class BasePageDataSource<T>() : PageKeyedDataSource<Int, T>() {
@@ -59,6 +61,11 @@ abstract class BasePageDataSource<T>() : PageKeyedDataSource<Int, T>() {
         } else if (response.status == Result.Status.ERROR) {
             postError(response.message!!)
         }
+    }
+
+    protected suspend fun saveMovies(movies: List<Movie>, movieDao: MovieDao, shelf: MovieShelf){
+        movies.forEach { it.shelf = shelf }
+        movieDao.insertMovies(movies)
     }
 
     protected fun postInitialNetworkStatus(page: Int) {

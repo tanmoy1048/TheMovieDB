@@ -1,10 +1,10 @@
 package com.seven.assignment.data.models.movielist
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.Ignore
-import androidx.room.PrimaryKey
+import androidx.room.*
 import com.google.gson.annotations.SerializedName
+import com.seven.assignment.data.local.GenreListConverter
+import com.seven.assignment.data.local.MovieShelfConverter
+import com.seven.assignment.data.paging.MovieShelf
 
 
 @Entity(tableName = "Movie")
@@ -20,8 +20,9 @@ class Movie(
     @SerializedName("title") val title: String,
     @ColumnInfo(name = "backdrop_path")
     @SerializedName("backdrop_path") val backdropPath: String?,
-
 ){
+    @ColumnInfo(name = "shelf")
+    @SerializedName("shelf") var shelf: MovieShelf?=null
     @Ignore
     @SerializedName("adult") val adult: Boolean?=null
     @Ignore
