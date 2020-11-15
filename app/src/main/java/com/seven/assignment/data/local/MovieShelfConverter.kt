@@ -2,10 +2,7 @@ package com.seven.assignment.data.local
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import com.seven.assignment.data.models.moviedetail.Genre
 import com.seven.assignment.data.paging.MovieShelf
-import java.util.*
 
 class MovieShelfConverter {
     @TypeConverter

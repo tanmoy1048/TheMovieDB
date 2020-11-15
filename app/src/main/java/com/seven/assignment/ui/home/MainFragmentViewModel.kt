@@ -20,7 +20,7 @@ class MainFragmentViewModel @Inject constructor(private val mainRepository: Main
 
     fun getMovies() {
         showSwipeToRefresh.postValue(false)
-        if(loaded){
+        if (loaded) {
             return
         }
         pagedNowPlayingMovieResult.postValue(
@@ -110,7 +110,7 @@ class MainFragmentViewModel @Inject constructor(private val mainRepository: Main
     val combinedNetworkState = Transformations.switchMap(combinedNetworkStateData) {
         if (it.nowPlayingStatus != null && it.popularStatus != null && it.topRatedStatus != null && it.upComingStatus != null) {
             val status = it.getStatus()
-            if(status == NetworkState.LOADED){
+            if (status == NetworkState.LOADED) {
                 loaded = true
             }
             liveData { emit(it.getStatus()) }

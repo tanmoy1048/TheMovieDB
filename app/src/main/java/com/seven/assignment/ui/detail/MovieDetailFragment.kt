@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import com.seven.assignment.BuildConfig
 import com.seven.assignment.R
 import com.seven.assignment.extension.requestGlideListener
@@ -63,6 +64,12 @@ class MovieDetailFragment : DaggerFragment() {
             }
             movieDetail?.voteAverage?.let {
                 voteAverage.text = getString(R.string.vote_average, it)
+            }
+        })
+        viewModel.networkErrorMessage.observe(viewLifecycleOwner, {
+            it?.let { msg ->
+                Snackbar.make(coordinator, msg, Snackbar.LENGTH_LONG)
+                    .show()
             }
         })
     }

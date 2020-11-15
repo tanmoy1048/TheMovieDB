@@ -2,7 +2,6 @@ package com.seven.assignment.di.main
 
 import android.app.Application
 import com.google.gson.Gson
-import com.seven.assignment.BaseApplication
 import com.seven.assignment.data.local.MovieDao
 import com.seven.assignment.data.remote.ApiService
 import com.seven.assignment.data.repository.MainRepository

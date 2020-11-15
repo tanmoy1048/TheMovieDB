@@ -22,4 +22,8 @@ class MovieDetailViewModel @Inject constructor(private val mainRepository: MainR
     val networkState = Transformations.switchMap(movieResponse) {
         liveData { emit(it?.status) }
     }
+
+    val networkErrorMessage = Transformations.switchMap(movieResponse) {
+        liveData { emit(it?.message) }
+    }
 }

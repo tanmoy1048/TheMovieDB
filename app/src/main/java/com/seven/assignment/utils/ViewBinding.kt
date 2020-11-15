@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package com.seven.assignment.ui.home
+package com.seven.assignment.utils
 
 import android.view.View
 import android.widget.ImageView

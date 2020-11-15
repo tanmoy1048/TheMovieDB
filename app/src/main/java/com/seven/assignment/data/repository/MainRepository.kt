@@ -60,7 +60,9 @@ constructor(
 
     fun observePagedNowPlayingMovies(
         coroutineScope: CoroutineScope
-    ) = if (Utils.isInternetAvailable(application)) observeRemotePagedNowPlayingMovies(coroutineScope)
+    ) = if (Utils.isInternetAvailable(application)) observeRemotePagedNowPlayingMovies(
+        coroutineScope
+    )
     else observeLocalPagedMovies(MovieShelf.NOW_PLAYING)
 
     fun observePagedUpComingMovies(

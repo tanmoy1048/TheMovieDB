@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Assignment</string>
     <string name="vote_average">Average Vote: %1f</string>
+    <string name="retry">Retry</string>
     <plurals name="minutes">
         <item quantity="one">%d Minute</item>
         <item quantity="other">%d Minutes</item>

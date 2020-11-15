@@ -6,10 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import com.google.android.material.snackbar.Snackbar
+import com.seven.assignment.R
+import com.seven.assignment.data.Status
 import com.seven.assignment.data.models.movielist.Movie
 import com.seven.assignment.databinding.FragmentMainBinding
 import com.seven.assignment.viewmodels.ViewModelProviderFactory
 import dagger.android.support.DaggerFragment
+import kotlinx.android.synthetic.main.fragment_main.*
 import javax.inject.Inject
 
 
@@ -62,7 +66,15 @@ class MainFragment : DaggerFragment(), MovieClickListener {
         viewModel.upComingMovies.observe(viewLifecycleOwner, {
             upComingMovieAdapter.submitList(it)
         })
-
+        viewModel.combinedNetworkState.observe(viewLifecycleOwner, {
+            if (it?.status == Status.FAILED) {
+                it.msg?.let { it1 ->
+                    Snackbar.make(coordinator, it1, Snackbar.LENGTH_LONG)
+                        .setAction(getText(R.string.retry)) { viewModel.onRefresh() }
+                        .show()
+                }
+            }
+        })
         viewModel.getMovies()
     }
 

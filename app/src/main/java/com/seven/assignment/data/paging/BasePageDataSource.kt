@@ -63,7 +63,7 @@ abstract class BasePageDataSource<T>() : PageKeyedDataSource<Int, T>() {
         }
     }
 
-    protected suspend fun saveMovies(movies: List<Movie>, movieDao: MovieDao, shelf: MovieShelf){
+    protected suspend fun saveMovies(movies: List<Movie>, movieDao: MovieDao, shelf: MovieShelf) {
         movies.forEach { it.shelf = shelf }
         movieDao.insertMovies(movies)
     }
