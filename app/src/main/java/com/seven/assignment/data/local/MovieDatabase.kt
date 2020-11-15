@@ -9,7 +9,7 @@ import com.seven.assignment.data.models.movielist.Movie
 
 @Database(
     entities = [Movie::class, MovieDetail::class],
-    version = 3,
+    version = 4,
     exportSchema = false
 )
 @TypeConverters(MovieShelfConverter::class)

@@ -23,42 +23,5 @@ class Movie(
     @SerializedName("backdrop_path") val backdropPath: String?,
 ) {
     @ColumnInfo(name = "shelf")
-    @SerializedName("shelf")
     var shelf: MovieShelf? = null
-
-    @Ignore
-    @SerializedName("adult")
-    val adult: Boolean? = null
-
-    @Ignore
-    @SerializedName("overview")
-    val overview: String? = null
-
-    @Ignore
-    @SerializedName("release_date")
-    val releaseDate: String? = null
-
-    @Ignore
-    @SerializedName("genre_ids")
-    val genreIds: List<Int>? = null
-
-    @Ignore
-    @SerializedName("popularity")
-    val popularity: Double? = null
-
-    @Ignore
-    @SerializedName("vote_count")
-    val voteCount: Int? = null
-
-    @Ignore
-    @SerializedName("video")
-    val video: Boolean? = null
-
-    @Ignore
-    @SerializedName("vote_average")
-    val voteAverage: Double? = null
-
-    @Ignore
-    @SerializedName("original_language")
-    val originalLanguage: String? = null
 }

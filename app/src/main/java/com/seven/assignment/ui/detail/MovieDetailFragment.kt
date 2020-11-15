@@ -60,7 +60,7 @@ class MovieDetailFragment : DaggerFragment() {
             title.text = movieDetail?.title
             genre.text = movieDetail?.genres?.joinToString(separator = ",") { it.name }
             movieDetail?.runtime?.let {
-                runningTime.text = resources.getQuantityString(R.plurals.minutes, it)
+                runningTime.text = resources.getQuantityString(R.plurals.minutes, it, it)
             }
             movieDetail?.voteAverage?.let {
                 voteAverage.text = getString(R.string.vote_average, it)
