@@ -18,6 +18,9 @@ class MainFragmentViewModel @Inject constructor(private val mainRepository: Main
 
     fun getMovies() {
         showSwipeToRefresh.postValue(false)
+        if(combinedNetworkState.value?.status == Status.SUCCESS){
+            return
+        }
         pagedNowPlayingMovieResult.postValue(
             mainRepository.observeRemotePagedNowPlayingMovies(
                 viewModelScope
