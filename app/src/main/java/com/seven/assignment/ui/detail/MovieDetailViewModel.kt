@@ -12,7 +12,7 @@ class MovieDetailViewModel @Inject constructor(private val mainRepository: MainR
     val movieId = MutableLiveData<Int>()
 
     private val movieResponse = Transformations.switchMap(movieId) {
-        mainRepository.getMovieDetail(it)
+        mainRepository.observeDealDetail(it)
     }
 
     val movieDetail = Transformations.switchMap(movieResponse) {

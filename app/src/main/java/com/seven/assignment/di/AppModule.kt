@@ -75,7 +75,7 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideDealDatabase(application: Application): MovieDatabase {
+    fun provideMovieDatabase(application: Application): MovieDatabase {
         return Room.databaseBuilder(
             application,
             MovieDatabase::class.java,
@@ -86,7 +86,7 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideDealDao(movieDatabase: MovieDatabase): MovieDao {
-        return movieDatabase.dealDao()
+    fun provideMovieDao(movieDatabase: MovieDatabase): MovieDao {
+        return movieDatabase.movieDao()
     }
 }

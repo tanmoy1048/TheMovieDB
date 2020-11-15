@@ -12,5 +12,5 @@ import com.seven.assignment.data.models.movielist.Movie
     exportSchema = false
 )
 abstract class MovieDatabase : RoomDatabase() {
-    abstract fun dealDao(): MovieDao
+    abstract fun movieDao(): MovieDao
 }

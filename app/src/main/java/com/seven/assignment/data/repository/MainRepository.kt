@@ -10,6 +10,7 @@ import com.seven.assignment.data.models.Listing
 import com.seven.assignment.data.models.movielist.Movie
 import com.seven.assignment.data.paging.*
 import com.seven.assignment.data.remote.ApiService
+import com.seven.assignment.data.resultLiveData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
@@ -37,6 +38,13 @@ constructor(
     suspend fun getUpcomingMovies(page: Int = 1) = getResult {
         apiService.getUpcomingMovies(page)
     }
+
+    fun observeDealDetail(id: Int) = resultLiveData(
+        databaseQuery = { movieDao.getMovieDetail(id) },
+        networkCall = { getResult { apiService.getMovieDetail(id) } },
+        saveCallResult = {
+            movieDao.insertMovieDetail(it)
+        })
 
     fun getMovieDetail(movieId: Int) = liveData(Dispatchers.IO) {
         emit(Result.loading())
